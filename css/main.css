@@ -41,14 +41,23 @@
     margin-left: 20px;
 }
 
-.alert-content .select {
+.alert-content .select-box {
     width: 15px;
     height: 15px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.alert-content .select {
     background-image: url(../image/check.png);
     background-size: 15px 15px;
     background-repeat: no-repeat;
-    display: inline-block;
-    margin-right: 10px;
+}
+
+.alert-content .unselect {
+    background-image: url(../image/un_check.png);
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
 }
 
 

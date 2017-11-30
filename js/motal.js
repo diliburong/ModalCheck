@@ -6,7 +6,7 @@
 
     var _elem;
 
-    
+
 
     var totalItem;
 
@@ -17,8 +17,43 @@
     var alertBody = document.createElement("div");
     var alertContent = document.createElement("div");
 
+    // common function
+    function hasClass(el, className) {
+        let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
+        return reg.test(el.className)
+    }
+
+    function addClass(el, className) {
+        if (hasClass(el, className)) {
+            return
+        }
+        var newClass = el.className.split(' ')
+        newClass.push(className)
+        el.className = newClass.join(' ')
+    }
+
+    function removeClass(el, className) {
+        if (hasClass(el, className)) {
+            var reg = new RegExp("(\\s|^)" + className + "(\\s|$)");
+            el.className = el.className.replace(reg, '');
+        }
+    }
+
+    // switch class
+    function switchClass(el, classNameFirst, classNameSecond) {
+        if(hasClass(el, classNameFirst)) {
+            removeClass(el, classNameFirst);
+            addClass(el,classNameSecond);
+        } else if(hasClass(el, classNameSecond)){
+            removeClass(el, classNameSecond)
+            addClass(el, classNameFirst);
+        }
+    }
+
+
+    // init
     function _init() {
-        
+
         alertBody.className = 'alert-body';
 
 
@@ -32,7 +67,7 @@
 
 
         // content
-       
+
         alertContent.className = 'alert-content';
 
         // bottom
@@ -45,9 +80,9 @@
 
         var cancelButton = document.createElement("button");
         cancelButton.innerText = 'Cancel';
-        cancelButton.className += 'btn';
-        cancelButton.className += ' cancel-btn';
 
+        addClass(cancelButton, 'btn');
+        addClass(cancelButton, 'cancel-btn');
         cancelButton.addEventListener('click', function (e) {
             close(alertBody);
         });
@@ -55,8 +90,8 @@
 
         var confirmButton = document.createElement("button");
         confirmButton.innerText = 'OK';
-        confirmButton.className += 'btn';
-        confirmButton.className += ' confirm-btn';
+        addClass(confirmButton, 'btn');
+        addClass(confirmButton, 'confirm-btn')
 
         confirmButton.addEventListener('click', function (e) {
             alert('33');
@@ -74,7 +109,7 @@
         alertBody.appendChild(alertContent);
         alertBody.appendChild(alertBottom);
 
-        document.body.appendChild(alertBody);
+       // document.body.appendChild(alertBody);
     }
 
 
@@ -86,7 +121,11 @@
                 editItem.className = 'edit-item';
 
                 var icon = document.createElement("div");
-                icon.className = 'select';
+                addClass(icon, 'select-box');
+                addClass(icon, 'unselect');
+                icon.addEventListener('click', function (e) {
+                    switchClass(this, 'unselect', 'select');
+                })
 
                 var para = document.createElement("span");
                 var node = document.createTextNode(item.name);
@@ -137,9 +176,9 @@
 
             _elem = elem;
             _setStyle(elem);
-
+            _init();
             _elem.addEventListener('click', function (e) {
-                _init();
+                document.body.appendChild(alertBody);
             })
             return this.motal;
         },
