@@ -1,0 +1,91 @@
+.alert-body {
+    z-index: 999999;
+    position: fixed;
+    width: 550px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px grey;
+    margin-left: calc(-18%);
+    margin-top: calc(-10%);
+}
+
+.alert-head {
+    width: 100%;
+    height: 25%;
+    line-height: 45px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.alert-head span {
+    color: rgb(51, 51, 51);
+    font-weight: bold;
+    font-size: 18px;
+    margin-left:25px;
+}
+
+.alert-content {
+    width: 100%;
+    padding-top: 4%;
+    padding-left: 6%;
+    padding-right: 6%;
+    height: 50%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.alert-content .edit-item {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.alert-content .select {
+    width: 15px;
+    height: 15px;
+    background-image: url(../image/check.png);
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
+.alert-bottom {
+    width: 100%;
+    height: 25%;
+}
+
+.alert-button-group {
+    float: right;
+    margin-right: 20px;
+}
+
+.alert-bottom .btn {
+    margin-left: 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 110px;
+    height: 38px;
+    background: #fff;
+    border: 2px solid #181818;
+    cursor: pointer;
+}
+
+.alert-bottom .cancel-btn{
+    color: #337ab7;
+
+}
+
+.alert-bottom .cancel-btn:hover{
+    color: #23527c;
+}
+
+.alert-bottom .confirm-btn {
+    background-color: #1a1a1a;
+    color: white;
+}
+
