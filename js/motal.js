@@ -41,10 +41,10 @@
 
     // switch class
     function switchClass(el, classNameFirst, classNameSecond) {
-        if(hasClass(el, classNameFirst)) {
+        if (hasClass(el, classNameFirst)) {
             removeClass(el, classNameFirst);
-            addClass(el,classNameSecond);
-        } else if(hasClass(el, classNameSecond)){
+            addClass(el, classNameSecond);
+        } else if (hasClass(el, classNameSecond)) {
             removeClass(el, classNameSecond)
             addClass(el, classNameFirst);
         }
@@ -94,7 +94,26 @@
         addClass(confirmButton, 'confirm-btn')
 
         confirmButton.addEventListener('click', function (e) {
-            alert('33');
+            var newSelectItems = [];
+            var editItems = document.getElementsByClassName('edit-item');
+            for (var i = 0; i < editItems.length; i++) {
+                if (editItems[i].getElementsByClassName('select').length) {
+                    var select = editItems[i].getElementsByClassName('select')[0];
+                    // id
+
+                    var selectedObject = {
+                        id: select.id,
+                        name: select.nextElementSibling.innerText
+                    }
+
+                    newSelectItems.push(selectedObject);
+                }
+            }
+            selectItems = newSelectItems;
+            _setSelection(2);
+            close(alertBody);
+
+            
         });
 
 
@@ -109,7 +128,7 @@
         alertBody.appendChild(alertContent);
         alertBody.appendChild(alertBottom);
 
-       // document.body.appendChild(alertBody);
+        // document.body.appendChild(alertBody);
     }
 
 
@@ -119,6 +138,7 @@
 
                 var editItem = document.createElement("div");
                 editItem.className = 'edit-item';
+                // editItem.id = item.id;
 
                 var icon = document.createElement("div");
                 addClass(icon, 'select-box');
@@ -126,6 +146,8 @@
                 icon.addEventListener('click', function (e) {
                     switchClass(this, 'unselect', 'select');
                 })
+
+                icon.id = item.id;
 
                 var para = document.createElement("span");
                 var node = document.createTextNode(item.name);
@@ -141,10 +163,19 @@
         }
     }
 
-    function _setSelection() {
+    function _setSelection(type = 1) {
         if (typeof selectItems === 'object') {
+            if(type === 2) {
+                var allSelectedItem = document.getElementsByClassName('select-item-name');
+
+                for(var i=allSelectedItem.length-1;i>=0;i--) {
+                    _elem.removeChild(allSelectedItem.item(i));
+                }
+            }
+
             selectItems.forEach(function (item) {
                 var para = document.createElement("span");
+                addClass(para, 'select-item-name');
                 var node = document.createTextNode(item.name + ', ');
                 para.appendChild(node);
                 _elem.appendChild(para);
