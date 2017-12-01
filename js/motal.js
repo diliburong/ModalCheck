@@ -173,19 +173,22 @@
                 }
             }
 
+            var outputInput = _elem.getElementsByClassName('motal-output-input')[0];
             selectItems.forEach(function (item) {
                 var para = document.createElement("span");
                 addClass(para, 'select-item-name');
                 var node = document.createTextNode(item.name + ', ');
                 para.appendChild(node);
                 _elem.appendChild(para);
+
+                outputInput.value += (item.id + ',')
             });
         }
     }
 
 
     function _setStyle(elem) {
-        //  elem.style.color = 'red';
+
     }
 
 
@@ -226,7 +229,7 @@
             totalItem = ops;
             _setTotalItem();
             return this.motal;
-        }
+        },
     }
 
     this.motal = api;

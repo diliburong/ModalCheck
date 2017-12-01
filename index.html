@@ -7,34 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="./css/main.css">
-    <style>
-        .abs {
-            font-weight: bold;
-            color: #858585;
-            max-width: 300px;
-            line-height: 21px;
-            padding: 5px 4px 6px;
-        }
-
-        .user-input-content {
-            border: none;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.1) !important;
-        }
-    </style>
 </head>
 
 <body>
 
-    <div class="abs user-input-content" id="demo">
-        <span>
-            Aston
-        </span>
-        <span>
-            bbk
-        </span>
+    <div class=".motal-input user-input-content" id="demo">
     </div>
 
-    <div class="abs user-input-content" id="demo1"></div>
+    <div class=".motal-input user-input-content" id="demo1">
+        <input type="hidden" class="motal-output-input" id="">
+    </div>
+
+    
 
 </body>
 <script src="./js/jquery-2.2.4.min.js"></script>
@@ -69,6 +53,8 @@
     motal.listen('#demo1')
     motal.setSelect(selectOption);
     motal.setTotalItem(totalOption);
+    
+
 
    // motal.options(selectOption);
    // motal.setSelect(selectOption);
