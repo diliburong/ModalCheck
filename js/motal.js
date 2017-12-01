@@ -1,15 +1,27 @@
-var motalCheck = function (opts) {
+var motalCheck = function (opts , el) {
     // Opiton
     var config = {
-        title: '13'
+        title: '13',
+        totalItems:[],
+        selectItems:[]
     }
 
-    var _elem;
+    var option = Object.assign(config , opts);
 
-    var totalItem;
 
+    // get first el
+    var _elem = el[0];
+    _elem.addEventListener('click' , function(){
+       open();
+    });
+
+    var totalItems = option.totalItems;
+
+    
     // seleected items.
-    var selectItems;
+    var selectItems = option.selectItems;
+    console.log(selectItems);
+
 
     var dialog = {}
     var alertBody = document.createElement("div");
@@ -46,6 +58,28 @@ var motalCheck = function (opts) {
         close();
     })
 
+    // confirm function
+    confirmButton.addEventListener('click', function (e) {
+        var newSelectItems = [];
+        var editItems = document.getElementsByClassName('edit-item');
+        for (var i = 0; i < editItems.length; i++) {
+            if (editItems[i].getElementsByClassName('select').length) {
+                var select = editItems[i].getElementsByClassName('select')[0];
+                // id
+
+                var selectedObject = {
+                    id: select.id,
+                    name: select.nextElementSibling.innerText
+                }
+
+                newSelectItems.push(selectedObject);
+            }
+        }
+        selectItems = newSelectItems;
+        _setSelection(2);
+        close(alertBody);
+    });
+
     // common function
     function hasClass(el, className) {
         let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
@@ -79,9 +113,11 @@ var motalCheck = function (opts) {
         }
     }
 
-
-
+    // Init
     dialog.init = function () {
+        _setSelection();
+        _setTotalItem();
+
         alertTitle.appendChild(alertTitleContent);
         alertHead.appendChild(alertTitle);
 
@@ -94,41 +130,11 @@ var motalCheck = function (opts) {
         alertBody.appendChild(alertHead);
         alertBody.appendChild(alertContent);
         alertBody.appendChild(alertBottom);
-
-        document.body.appendChild(alertBody);
     }
-    // init
-    function _init() {
-
-
-
-        confirmButton.addEventListener('click', function (e) {
-            var newSelectItems = [];
-            var editItems = document.getElementsByClassName('edit-item');
-            for (var i = 0; i < editItems.length; i++) {
-                if (editItems[i].getElementsByClassName('select').length) {
-                    var select = editItems[i].getElementsByClassName('select')[0];
-                    // id
-
-                    var selectedObject = {
-                        id: select.id,
-                        name: select.nextElementSibling.innerText
-                    }
-
-                    newSelectItems.push(selectedObject);
-                }
-            }
-            selectItems = newSelectItems;
-            _setSelection(2);
-            close(alertBody);
-        });
-
-    }
-
 
     function _setTotalItem() {
-        if (typeof totalItem === 'object') {
-            totalItem.forEach((item) => {
+        if (typeof totalItems === 'object') {
+            totalItems.forEach((item) => {
 
                 var editItem = document.createElement("div");
                 editItem.className = 'edit-item';
@@ -180,17 +186,15 @@ var motalCheck = function (opts) {
         }
     }
 
-
-    function _setStyle(elem) {
-
-    }
-
-
     function close() {
         document.body.removeChild(alertBody);
     }
-    // Api
 
+    function open() {
+        document.body.appendChild(alertBody);
+    }
+
+    // Api
     var api = {
         listen: function listen(elem) {
             if (typeof elem === 'string') {
@@ -202,25 +206,10 @@ var motalCheck = function (opts) {
                 return;
             }
             return this.motal;
-        },
-        options: function options(ops) {
-            totalItem = ops;
-            return this.motal;
-        },
-        setSelect: function (ops) {
-            selectItems = ops;
-            _setSelection();
-            return this.motal;
-        },
-        setTotalItem: function (ops) {
-            totalItem = ops;
-            _setTotalItem();
-            return this.motal;
-        },
+        }
     }
 
     dialog.init();
     return dialog;
-    //this.motal = api;
 };
 

@@ -15,7 +15,6 @@
     </div>
 
     <div class="motal-input user-input-content" id="demo1">
-        123
         <input type="hidden" class="motal-output-input" id="">
     </div>
 
@@ -85,26 +84,20 @@
         }
     ]
 
-
     $(function(){
-        $("#demo1").click(function(){
-            var test = motalCheck({
+        var test = motalCheck({
+            title: "test",
+            totalItems: totalOption,
+            selectItems: selectOption
+        }, $("#demo1"));
 
-            });
-        })
+                
+        var test2 = motalCheck({
+            title: "test",
+            totalItems: totalOption2,
+            selectItems: selectOption2
+        }, $("#demo2"));
     })
-
-   // motal.listen('#demo1')
-   // motal.setSelect(selectOption);
-    //motal.setTotalItem(totalOption);
-
-
-    //motal.listen('#demo2')
-    //motal.setSelect(selectOption2);
-    //motal.setTotalItem(totalOption2);
-   // motal.options(selectOption);
-   // motal.setSelect(selectOption);
-
 </script>
 
 </html>
