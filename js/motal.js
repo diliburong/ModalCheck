@@ -1,21 +1,50 @@
-; (function () {
+var motalCheck = function (opts) {
     // Opiton
     var config = {
-        data: '13'
+        title: '13'
     }
 
     var _elem;
-
-
 
     var totalItem;
 
     // seleected items.
     var selectItems;
 
-
+    var dialog = {}
     var alertBody = document.createElement("div");
+    alertBody.className = 'alert-body';
+    var alertHead = document.createElement("div");
+    alertHead.className = 'alert-head';
+    var alertTitle = document.createElement("span");
+    var alertTitleContent = document.createTextNode("Title");
+
+
+    //content
     var alertContent = document.createElement("div");
+    alertContent.className = 'alert-content';
+
+
+    // bottom
+    var alertBottom = document.createElement("div");
+    alertBottom.className = 'alert-bottom';
+
+    // button group
+    var alertButtonGroup = document.createElement("div");
+    alertButtonGroup.className = 'alert-button-group';
+
+    var confirmButton = document.createElement("button");
+    confirmButton.innerText = 'OK';
+    addClass(confirmButton, 'btn');
+    addClass(confirmButton, 'confirm-btn')
+
+    var cancelButton = document.createElement("button");
+    cancelButton.innerText = 'Cancel';
+    addClass(cancelButton, 'btn');
+    addClass(cancelButton, 'cancel-btn');
+    cancelButton.addEventListener("click", function(e){
+        close();
+    })
 
     // common function
     function hasClass(el, className) {
@@ -51,47 +80,27 @@
     }
 
 
-    // init
-    function _init() {
 
-        alertBody.className = 'alert-body';
-
-
-        // head
-        var alertHead = document.createElement("div");
-        alertHead.className = 'alert-head';
-        var alertTitle = document.createElement("span");
-        var alertTitleContent = document.createTextNode("Title");
+    dialog.init = function () {
         alertTitle.appendChild(alertTitleContent);
         alertHead.appendChild(alertTitle);
 
 
-        // content
+        alertButtonGroup.appendChild(cancelButton)
+        alertButtonGroup.appendChild(confirmButton);
+        alertBottom.appendChild(alertButtonGroup);
 
-        alertContent.className = 'alert-content';
+        // add to alert body
+        alertBody.appendChild(alertHead);
+        alertBody.appendChild(alertContent);
+        alertBody.appendChild(alertBottom);
 
-        // bottom
-        var alertBottom = document.createElement("div");
-        alertBottom.className = 'alert-bottom';
-
-        // button group
-        var alertButtonGroup = document.createElement("div");
-        alertButtonGroup.className = 'alert-button-group';
-
-        var cancelButton = document.createElement("button");
-        cancelButton.innerText = 'Cancel';
-
-        addClass(cancelButton, 'btn');
-        addClass(cancelButton, 'cancel-btn');
-        cancelButton.addEventListener('click', function (e) {
-            close(alertBody);
-        });
+        document.body.appendChild(alertBody);
+    }
+    // init
+    function _init() {
 
 
-        var confirmButton = document.createElement("button");
-        confirmButton.innerText = 'OK';
-        addClass(confirmButton, 'btn');
-        addClass(confirmButton, 'confirm-btn')
 
         confirmButton.addEventListener('click', function (e) {
             var newSelectItems = [];
@@ -112,23 +121,8 @@
             selectItems = newSelectItems;
             _setSelection(2);
             close(alertBody);
-
-            
         });
 
-
-        alertButtonGroup.appendChild(cancelButton)
-        alertButtonGroup.appendChild(confirmButton);
-        alertBottom.appendChild(alertButtonGroup);
-
-
-
-        // add to alert body
-        alertBody.appendChild(alertHead);
-        alertBody.appendChild(alertContent);
-        alertBody.appendChild(alertBottom);
-
-        // document.body.appendChild(alertBody);
     }
 
 
@@ -165,10 +159,10 @@
 
     function _setSelection(type = 1) {
         if (typeof selectItems === 'object') {
-            if(type === 2) {
+            if (type === 2) {
                 var allSelectedItem = document.getElementsByClassName('select-item-name');
 
-                for(var i=allSelectedItem.length-1;i>=0;i--) {
+                for (var i = allSelectedItem.length - 1; i >= 0; i--) {
                     _elem.removeChild(allSelectedItem.item(i));
                 }
             }
@@ -192,7 +186,7 @@
     }
 
 
-    function close(alertBody) {
+    function close() {
         document.body.removeChild(alertBody);
     }
     // Api
@@ -207,13 +201,6 @@
                 }
                 return;
             }
-
-            _elem = elem;
-            _setStyle(elem);
-            _init();
-            _elem.addEventListener('click', function (e) {
-                document.body.appendChild(alertBody);
-            })
             return this.motal;
         },
         options: function options(ops) {
@@ -232,6 +219,8 @@
         },
     }
 
-    this.motal = api;
-})();
+    dialog.init();
+    return dialog;
+    //this.motal = api;
+};
 

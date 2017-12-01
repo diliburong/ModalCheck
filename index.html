@@ -11,14 +11,19 @@
 
 <body>
 
-    <div class=".motal-input user-input-content" id="demo">
+    <div class="motal-input user-input-content" id="demo">
     </div>
 
-    <div class=".motal-input user-input-content" id="demo1">
+    <div class="motal-input user-input-content" id="demo1">
+        123
         <input type="hidden" class="motal-output-input" id="">
     </div>
 
-    
+    <div class="motal-input user-input-content" id="demo2">
+        <input type="hidden" class="motal-output-input" id="">
+    </div>
+
+
 
 </body>
 <script src="./js/jquery-2.2.4.min.js"></script>
@@ -34,7 +39,7 @@
             name: 'cm2'
         },
         {
-            id:3,
+            id: 3,
             name: 'cm3'
         }
     ]
@@ -50,15 +55,55 @@
         }
     ]
 
-    motal.listen('#demo1')
-    motal.setSelect(selectOption);
-    motal.setTotalItem(totalOption);
-    
+    var totalOption2 = [
+        {
+            id: 5,
+            name: 'qt1'
+        },
+        {
+            id: 6,
+            name: 'qt2'
+        },
+        {
+            id: 7,
+            name: 'qt3'
+        },
+        {
+            id: 8,
+            name: 'qt4'
+        }
+    ]
+
+    var selectOption2 = [
+        {
+            id: 7,
+            name: 'qt3'
+        },
+        {
+            id: 8,
+            name: 'qt4'
+        }
+    ]
 
 
+    $(function(){
+        $("#demo1").click(function(){
+            var test = motalCheck({
+
+            });
+        })
+    })
+
+   // motal.listen('#demo1')
+   // motal.setSelect(selectOption);
+    //motal.setTotalItem(totalOption);
+
+
+    //motal.listen('#demo2')
+    //motal.setSelect(selectOption2);
+    //motal.setTotalItem(totalOption2);
    // motal.options(selectOption);
    // motal.setSelect(selectOption);
-   
 
 </script>
 
