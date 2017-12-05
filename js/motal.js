@@ -166,7 +166,7 @@ var motalCheck = function (opts , el) {
     function _setSelection(type = 1) {
         if (typeof selectItems === 'object') {
             if (type === 2) {
-                var allSelectedItem = document.getElementsByClassName('select-item-name');
+                var allSelectedItem = _elme.getElementsByClassName('select-item-name');
 
                 for (var i = allSelectedItem.length - 1; i >= 0; i--) {
                     _elem.removeChild(allSelectedItem.item(i));
@@ -174,6 +174,7 @@ var motalCheck = function (opts , el) {
             }
 
             var outputInput = _elem.getElementsByClassName('motal-output-input')[0];
+            outputInput.value = '';
             selectItems.forEach(function (item) {
                 var para = document.createElement("span");
                 addClass(para, 'select-item-name');
