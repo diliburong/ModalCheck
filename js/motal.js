@@ -166,7 +166,7 @@ var motalCheck = function (opts , el) {
     function _setSelection(type = 1) {
         if (typeof selectItems === 'object') {
             if (type === 2) {
-                var allSelectedItem = _elme.getElementsByClassName('select-item-name');
+                var allSelectedItem = _elem.getElementsByClassName('select-item-name');
 
                 for (var i = allSelectedItem.length - 1; i >= 0; i--) {
                     _elem.removeChild(allSelectedItem.item(i));
@@ -184,6 +184,9 @@ var motalCheck = function (opts , el) {
 
                 outputInput.value += (item.id + ',')
             });
+            str = outputInput.value;
+            str = (str.slice(str.length-1) == ',') ? str.slice(0, -1) : str;
+            outputInput.value = str;
         }
     }
 
